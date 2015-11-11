@@ -47,8 +47,8 @@ user's request.
 Extensions will be found from the path, and will work similarly to
 `git`, ie `knife-role` will be available as `knife role`. Knife will
 attempt to use the most specific extension first, falling back to less
-specific ones if necessary. To preserve backwards compatibility, a ruby
-helper will be the final fall back.
+specific ones if necessary. To preserve backwards compatibility, and
+generally allow ruby plugins, a ruby helper will be the final fall back.
 
 To decline to respond to a request, extensions must exit with a status
 of 64, which is `EX_USAGE` in `sysexits.h`.
@@ -61,7 +61,10 @@ the user via the basic knife command.
 To enable extensions to be written in a language agnostic fashion, the
 current ruby specific config will need to be parsed and rendered
 statically. To ensure freshness, checksums of the ruby config will be
-maintained as part of the rendered config.
+maintained as part of the rendered config. The location of the most
+relevant configuration file will be passed to the subcommand via the
+`KNIFE_CONFIG_FILE` environment variable; subcommands are expected to
+load and parse the json config themselves.
 
 ## Copyright
 
